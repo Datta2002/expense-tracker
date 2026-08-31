@@ -11,7 +11,10 @@ public class ExpenseTracker {
             System.out.println("\nMenu:");
             System.out.println("1. Add Expense");
             System.out.println("2. Display All Expenses");
-            System.out.println("5. Exit");
+            System.out.println("3. Delete Expense");
+            System.out.println("4. Update Expense");
+            System.out.println("5. view total money spent");
+            System.out.println("6. Exit");
             System.out.print("Select option: ");
 
             int choice = input.nextInt();
@@ -24,6 +27,12 @@ public class ExpenseTracker {
                 case 2:
                     displayAllExpense();
                     break;
+                case 3:
+                    deleteExpense();
+                    break;
+                case 4:
+                    editExpense();
+                    break;
                 case 5:
                     System.exit(0);
                     break;
@@ -31,6 +40,22 @@ public class ExpenseTracker {
                     System.out.println("Invalid option");
             }
         }
+    }
+
+    private static void editExpense() {
+        System.out.println("Enter Expense Name:");
+        String expenseName = input.nextLine();
+
+        System.out.println("Enter Expense Description:");
+        String expenseDescription = input.nextLine();
+
+        System.out.println("Enter Expense Amount:");
+        int expenseAmount = input.nextInt();
+        input.nextLine();
+
+        expenseService.editExpense(expenseName,expenseDescription,expenseAmount);
+        System.out.println("Expense Edited Successfully");
+
     }
 
     public static void addExpense() {
@@ -56,5 +81,12 @@ public class ExpenseTracker {
     public static void displayAllExpense() {
         System.out.println("--- All Expenses ---");
         expenseService.displayData();
+    }
+
+    public static void deleteExpense() {
+        System.out.println("Enter Expense Name for Deletion : ");
+        String expenseName = input.nextLine();
+        expenseService.deleteExpense(expenseName);
+        System.out.println("Expense Deleted Successfully");
     }
 }
